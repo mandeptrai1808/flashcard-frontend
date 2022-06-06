@@ -1,0 +1,4 @@
+.active{
+    border-color: rgb(59 130 246 / var(--tw-border-opacity));;
+    border-bottom-width: 4px;
+}

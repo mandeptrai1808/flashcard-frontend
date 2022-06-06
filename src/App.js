@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomeTemplate from './Templates/HomeTemplate';
+import HomePage from './Pages/HomePage';
+import DrawerTemplate from './Templates/DrawerTemplate';
+import Desks from './Pages/Desks';
+import CreateDeskBtn from './Components/CreateDeskBtn';
+import ModalTemplate from './Templates/ModalTemplate';
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App relative" >
+      {/* <CreateDeskBtn/> */}
+      <DrawerTemplate/>
+      <ModalTemplate/>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<HomeTemplate component={<HomePage/>}/>}/>
+          <Route path="/desks" element={<HomeTemplate component={<Desks/>}/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
