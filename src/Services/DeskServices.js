@@ -14,5 +14,12 @@ export const DeskService = {
           url: `${BASE_URL}/desks/getdesks/${_userId}`,
           method: "GET"
       })
+    },
+
+    GetDeskById: (_id) => {
+      return axios({
+        url: `${BASE_URL}/desks/${_id}`,
+        method: "GET"
+      })
     }
 }

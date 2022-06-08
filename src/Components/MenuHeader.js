@@ -19,7 +19,9 @@ export default function MenuHeader() {
 
   const contentAvatar = (
     <div>
-      <div className="p-2 cursor-pointer border-b hover:bg-slate-100">
+      <div onClick={()=>{
+        navigate("/desks")
+      }} className="p-2 cursor-pointer border-b hover:bg-slate-100">
         Profile
       </div>
       <div className="p-2 cursor-pointer border-b hover:bg-slate-100">

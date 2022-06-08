@@ -47,3 +47,19 @@ export const CreateDeskApi = (_dataNewDesk) => {
     }
   };
 };
+
+export const GetDeskById = (_id) => {
+  return async (dispatch) => {
+    try {
+      let {data} = await DeskService.GetDeskById(_id);
+      dispatch({
+        type: "GET_DESK_DETAIL",
+        desk: data.desk,
+        cards: data.cards
+      })
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

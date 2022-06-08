@@ -6,6 +6,8 @@ import DrawerTemplate from './Templates/DrawerTemplate';
 import Desks from './Pages/Desks';
 import CreateDeskBtn from './Components/CreateDeskBtn';
 import ModalTemplate from './Templates/ModalTemplate';
+import DetailDesk from './Pages/DetailDesk';
+import EditDesk from './Pages/EditDesk';
 
 
 function App() {
@@ -19,6 +21,9 @@ function App() {
         <Routes>
           <Route path='/' element={<HomeTemplate component={<HomePage/>}/>}/>
           <Route path="/desks" element={<HomeTemplate component={<Desks/>}/>}/>
+          <Route path="/detaildesk/:deskId" element={<HomeTemplate component={<DetailDesk/>}/>}/>
+          <Route path="/editdesk/:deskId" element={<HomeTemplate component={<EditDesk/>}/>}/>
+
         </Routes>
       </BrowserRouter>
     </div>

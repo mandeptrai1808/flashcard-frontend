@@ -4,6 +4,7 @@ import { LikeFilled, StarFilled, LockOutlined, GlobalOutlined } from "@ant-desig
 import { useDispatch, useSelector } from "react-redux";
 import { GetDesksByUserId } from "../Redux/Actions/DeskAction";
 import { useNavigate } from "react-router-dom";
+
 const { TabPane } = Tabs;
 
 export default function Desks() {
@@ -17,9 +18,12 @@ export default function Desks() {
   const {myDesks} = useSelector(state => state.DesksReducer);
 
   const contentMyDesks = myDesks.map((item, index) => {
-    return  <div key={index} className="mb-5 duration-100 w-full h-500 relative cursor-pointer hover:bg-slate-100 bg-white shadow-md rounded-sm p-5">
+    return  <div onClick={()=>{
+    
+      navigate(`/detaildesk/${18082003+item.id}`)
+    }} key={index} className="mb-5 duration-100 w-full h-500 relative cursor-pointer hover:bg-slate-100 bg-white shadow-md rounded-sm p-5">
     <p className="m-0 font-bold text-xl">{item.name}</p>
-    <p className="mb-10 opacity-50">0 cards</p>
+    <p className="mb-10 opacity-50">{item.numCard} cards</p>
     <div  className="flex align-middle absolute bottom-0 left-5">
       <img
         src={item.avatar}
