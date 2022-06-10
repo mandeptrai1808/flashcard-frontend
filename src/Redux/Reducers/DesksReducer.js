@@ -2,7 +2,8 @@ const stateDefault = {
     myDesks: [],
     historyDesks: [],
     deskDetail: {},
-    cards: []
+    cards: [],
+    processCard: 1
 }
 
 export const DesksReducer = (state = stateDefault, action) => {
@@ -30,6 +31,46 @@ export const DesksReducer = (state = stateDefault, action) => {
 
       case "UPDATE_IMAGE": {
         state.cards[action.id].imageUrl = action.content;
+        return {...state}
+      }
+
+      case "RESET_PROCESSCARD":{
+        state.processCard = 1;
+        return {...state};
+      }
+
+      case "SET_PROCESSCARD": {
+        state.processCard = action.content;
+        return {...state}
+      }
+
+      case "SUFFLE_CARDS": {
+        let array = state.cards;
+        let currentIndex = array.length,  randomIndex;
+
+        // While there remain elements to shuffle.
+        while (currentIndex !== 0) {
+      
+          // Pick a remaining element.
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+      
+          // And swap it with the current element.
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
+
+        state.cards = array;
+        return {...state}
+      }
+
+      case "NEXT_CARD":{
+        state.processCard = state.processCard + 1;
+        return {...state}
+      }
+
+      case "PREV_CARD": {
+        state.processCard = state.processCard - 1;
         return {...state}
       }
 

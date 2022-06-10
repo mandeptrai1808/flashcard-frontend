@@ -8,13 +8,14 @@ import CreateDeskBtn from './Components/CreateDeskBtn';
 import ModalTemplate from './Templates/ModalTemplate';
 import DetailDesk from './Pages/DetailDesk';
 import EditDesk from './Pages/EditDesk';
+import ListCard from './Pages/ListCard';
+import LearnPage from './Pages/LearnPage';
 
 
 function App() {
 
   return (
     <div className="App relative" >
-      {/* <CreateDeskBtn/> */}
       <DrawerTemplate/>
       <ModalTemplate/>
       <BrowserRouter>
@@ -23,7 +24,8 @@ function App() {
           <Route path="/desks" element={<HomeTemplate component={<Desks/>}/>}/>
           <Route path="/detaildesk/:deskId" element={<HomeTemplate component={<DetailDesk/>}/>}/>
           <Route path="/editdesk/:deskId" element={<HomeTemplate component={<EditDesk/>}/>}/>
-
+          <Route path="/listcard/:deskId" element={<HomeTemplate component={<ListCard/>}/>}/>
+          <Route path="/learn/:deskId" element={<HomeTemplate component={<LearnPage/>}/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -79,12 +79,12 @@ export default function MenuHeader() {
 
   if (userData)
     contentControl = (
-      <div className="flex justify-around w-full pt-2">
+      <div className="flex justify-around w-full md:pt-2 pt-4">
         <Badge dot={true}>
           <Popover
             content={contentNotification}
             trigger="click"
-            className="focus:shadow-md cursor-pointer  rounded-full border-2 w-10 h-10 flex justify-center pt-2 text-xl"
+            className="focus:shadow-md cursor-pointer  rounded-full border-2 md:w-10 md:h-10 w-7 h-7 flex justify-center md:pt-2 md:text-xl pt-1 text-sm"
           >
             <NotificationOutlined style={{ opacity: 0.5 }} />
           </Popover>
@@ -92,7 +92,7 @@ export default function MenuHeader() {
         <Popover
           content={contentAvatar}
           trigger="click"
-          className="shadow-md cursor-pointer rounded-full border-2 w-10 h-10  flex justify-center  text-xl overflow-hidden"
+          className="shadow-md cursor-pointer rounded-full border-2 md:w-10 md:h-10 w-7 h-7  flex justify-center  text-xl overflow-hidden"
         >
           <img
             src={userData.avatar}
@@ -103,7 +103,7 @@ export default function MenuHeader() {
     );
 
   return (
-    <div className="h-14 relative z-10 px-5 shadow-md w-full grid grid-cols-10 bg-white">
+    <div className="h-14 relative z-20 px-5 shadow-md w-full grid grid-cols-10 bg-white">
       <div className="md:hidden block col-span-2 pt-3">
         <Button
           onClick={() => {

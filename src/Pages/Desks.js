@@ -4,6 +4,7 @@ import { LikeFilled, StarFilled, LockOutlined, GlobalOutlined } from "@ant-desig
 import { useDispatch, useSelector } from "react-redux";
 import { GetDesksByUserId } from "../Redux/Actions/DeskAction";
 import { useNavigate } from "react-router-dom";
+import CreateDeskBtn from "../Components/CreateDeskBtn";
 
 const { TabPane } = Tabs;
 
@@ -22,7 +23,7 @@ export default function Desks() {
     
       navigate(`/detaildesk/${18082003+item.id}`)
     }} key={index} className="mb-5 duration-100 w-full h-500 relative cursor-pointer hover:bg-slate-100 bg-white shadow-md rounded-sm p-5">
-    <p className="m-0 font-bold text-xl">{item.name}</p>
+    <p className="m-0 font-bold text-xl w-3/4">{item.name}</p>
     <p className="mb-10 opacity-50">{item.numCard} cards</p>
     <div  className="flex align-middle absolute bottom-0 left-5">
       <img
@@ -49,6 +50,7 @@ export default function Desks() {
 
   return (
     <div className="relative z-10 md:container md:mx-auto md:w-3/4 mx-5 py-5">
+      <CreateDeskBtn/>
       <div className="flex">
         <div className="rounded-full border-2 w-16 h-16 mr-5  flex justify-center  text-xl overflow-hidden">
           <img src={userData.avatar} alt="avt"></img>
