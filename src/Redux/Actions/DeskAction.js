@@ -63,3 +63,43 @@ export const GetDeskById = (_id) => {
     }
   }
 }
+
+export const UserLikeDesk = (_data) => {
+  return async (dispatch) => {
+    try {
+      let {data} = await DeskService.UserLikeDesk(_data);  
+    } catch (error) {
+      console.log(error)
+    }
+  }  
+}
+
+export const UserUnlikeDesk = (_data) => {
+  return async (dispatch) => {
+    try {
+      let {data} = await DeskService.UserUnlikeDesk(_data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const UserRateDesk = (_data) => {
+  return async (dispatch) => {
+    try {
+      let {data} = await DeskService.UserRateDesk(_data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const UserUpdateRateDesk = (_data) => {
+  return async (dispatch) => {
+    try {
+      let {data} = await DeskService.UserUpdateRateDesk(_data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

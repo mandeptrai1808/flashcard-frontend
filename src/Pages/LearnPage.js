@@ -79,7 +79,7 @@ export default function LearnPage() {
           </div>
         </div>
       <CarouselCard setHeight={sizeOfCarousel}/>
-      <div className="md:hidden flex justify-center">
+      <div className="md:hidden flex mt-5 justify-center">
       <Button onClick={() => {
             dispatch({type: "SUFFLE_CARDS"})
           }} className="mr-5">

@@ -81,7 +81,7 @@ export default function CarouselCar(props) {
                 >
                   <div>
                     {item.frontContent.split("\n").map((str, strIndex) => {
-                      return <p key={strIndex}>{str}</p>;
+                      return <p className="text-xl" key={strIndex}>{str}</p>;
                     })}
                   </div>
                 </div>
@@ -104,7 +104,7 @@ export default function CarouselCar(props) {
             >
               <div>
                 {item.backContent.split("\n").map((str, strIndex) => {
-                  return <p key={strIndex}>{str}</p>;
+                  return <p className="text-xl" key={strIndex}>{str}</p>;
                 })}
               </div>
             </div>

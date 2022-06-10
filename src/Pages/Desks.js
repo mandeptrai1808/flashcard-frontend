@@ -19,6 +19,11 @@ export default function Desks() {
   const {myDesks} = useSelector(state => state.DesksReducer);
 
   const contentMyDesks = myDesks.map((item, index) => {
+    let starScore = 0;
+    if (item.rates){
+      item.rates.map(item => starScore += item.star);
+      if (item.rates.length > 0) starScore = (starScore / item.rates.length).toFixed();
+    }
     return  <div onClick={()=>{
     
       navigate(`/detaildesk/${18082003+item.id}`)
@@ -34,8 +39,8 @@ export default function Desks() {
       <p>{item.username}</p>
     </div>
     <div className="flex absolute bottom-0 right-5">
-      <p className="mr-2"><LikeFilled style={{color: "blueviolet"}}/> {item.likes}</p>
-      <p><StarFilled style={{color: "yellowgreen"}}/> {item.rates <= 0 ? "Chưa có đánh giá": `${item.rates}`}</p>
+      <p className="mr-2"><LikeFilled style={{color: "blueviolet"}}/> {item.likes?.length}</p>
+      <p><StarFilled style={{color: "yellowgreen"}}/> {item.rates?.length <= 0 ? "Chưa có đánh giá": `${starScore}.0`}</p>
     </div>
     <div>
       <p className="mr-2 absolute top-5 right-5">{item.status === "PRIVATE" ? <LockOutlined/> : <GlobalOutlined />}</p>
@@ -65,6 +70,7 @@ export default function Desks() {
       <Tabs defaultActiveKey="1">
     <TabPane tab="Your desks" key="1">
     {contentMyDesks}
+    {myDesks.length === 0 ? <p>You don't have any desks!</p> : ""}
     </TabPane>
     <TabPane tab="History" key="2">
      History

@@ -21,5 +21,37 @@ export const DeskService = {
         url: `${BASE_URL}/desks/${_id}`,
         method: "GET"
       })
+    },
+
+    UserLikeDesk: (_data) => {
+      return axios({
+        url: `${BASE_URL}/likes/likedesk`,
+        data: _data,
+        method: "POST"
+      })      
+    },
+
+    UserUnlikeDesk: (_data) => {
+      return axios({
+        url: `${BASE_URL}/likes/unlikedesk`,
+        data: _data,
+        method: "DELETE"
+      })
+    },
+
+    UserRateDesk: (_data) => {
+      return axios({
+        url: `${BASE_URL}/rates`,
+        data: _data,
+        method: "POST"
+      })
+    },
+
+    UserUpdateRateDesk: (_data) => {
+      return axios({
+        url: `${BASE_URL}/rates`,
+        data: _data,
+        method: "PUT"
+      })
     }
 }

@@ -64,16 +64,27 @@ export const DesksReducer = (state = stateDefault, action) => {
         return {...state}
       }
 
-      case "NEXT_CARD":{
-        state.processCard = state.processCard + 1;
+      case "UNLIKE_DESK": {
+        const likeArray = state.deskDetail.likes.filter(item => item.userId !== action.id);
+        state.deskDetail.likes = likeArray;
         return {...state}
       }
 
-      case "PREV_CARD": {
-        state.processCard = state.processCard - 1;
+      case "LIKE_DESK": {
+        state.deskDetail.likes.push({userId: action.id});
+        return {...state};
+      }
+
+      case "RATE_DESK": {
+        state.deskDetail.rates.push({userId: action.id, star: action.star});
         return {...state}
       }
 
+      case "UPDATE_RATE":{
+        const index = state.deskDetail.rates.findIndex(item => item.userId === action.id);
+        state.deskDetail.rates[index].star = action.star;
+        return {...state}
+      }
       default:
           return {...state}
   }
