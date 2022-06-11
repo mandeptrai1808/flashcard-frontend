@@ -15,5 +15,13 @@ export const UserService = {
         data: _dataSignUp,
         method: "POST"
       })
+    },
+
+    UpdateUser: (_data, _id) => {
+      return axios({
+        url: `${BASE_URL}/users/update/${_id}`,
+        method: "PUT",
+        data: _data
+      })
     }
 }

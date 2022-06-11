@@ -48,3 +48,18 @@ export const SignUpUser = (_dataSignUp) => {
     }
   }
 }
+
+export const UpdateUser = (_data, _id) => {
+  return async (dispatch) => {
+    try {
+      let {data} = await UserService.UpdateUser(_data, _id);
+      localStorage.setItem('login_user', JSON.stringify(data.userFind));
+      dispatch({type: "IS_LOGIN"});
+      successNotification("Updated success!", "Bạn đã cập nhật tài khoản thành công!!")
+
+      console.log(data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

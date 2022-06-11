@@ -18,6 +18,21 @@ export const DesksReducer = (state = stateDefault, action) => {
         state.cards = action.cards;
         return {...state};
       }
+
+      case "GET_MY_HISTORY":{
+        let array = action.content;
+        console.log(array)
+        array.sort((item_a, item_b) => {
+          return (item_b.history_id - item_a.history_id)
+        })
+        state.myDesks = array;
+        return {...state}
+      }
+
+      case "UPDATE_DESK": {
+        state.deskDetail.name = action.name;
+        return {...state}
+      }
       
       case  "UPDATE_FRONT_CARD":{
         state.cards[action.id].frontContent = action.content;

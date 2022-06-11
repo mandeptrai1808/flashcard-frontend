@@ -31,6 +31,34 @@ export const GetDesksByUserId = (_userId) => {
   };
 };
 
+export const GetLikedDesksByUserId = (_userId) => {
+  return async (dispatch) => {
+    try {
+      let { data } = await DeskService.GetLikedDeskByUserId(_userId);
+      dispatch({
+        type: "GET_MY_DESKS",
+        content: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const GetHistoryDesksByUserId = (_userId) => {
+  return async (dispatch) => {
+    try {
+      let { data } = await DeskService.GetHistoryDesksByUserId(_userId);
+      dispatch({
+        type: "GET_MY_HISTORY",
+        content: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const CreateDeskApi = (_dataNewDesk) => {
   return async (dispatch) => {
     try {
@@ -98,6 +126,43 @@ export const UserUpdateRateDesk = (_data) => {
   return async (dispatch) => {
     try {
       let {data} = await DeskService.UserUpdateRateDesk(_data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const UpdateDesk = (_data, _id) => {
+  return async (dispatch) => {
+    try {
+      let {data} = await DeskService.UpdateDesk(_data, _id);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const DeleteDesk = (_id, _userId) => {
+  return async (dispatch) => {
+    try {
+      let {data} = await DeskService.DeleteDesk(_id);
+      successNotification(
+        "Deleted desk!",
+        "Bạn đã xóa desk thành công!!"
+      );
+      dispatch(GetDesksByUserId(_userId))
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const PushHistories = (_data) => {
+  return async (dispatch) => {
+    try {
+      let {data} = await DeskService.PushHistories(_data);
+      console.log(data);
     } catch (error) {
       console.log(error)
     }

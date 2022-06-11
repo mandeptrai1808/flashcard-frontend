@@ -94,10 +94,11 @@ export default function MenuHeader() {
           trigger="click"
           className="shadow-md cursor-pointer rounded-full border-2 md:w-10 md:h-10 w-7 h-7  flex justify-center  text-xl overflow-hidden"
         >
-          <img
-            src={userData.avatar}
-            alt="avt"
-          ></img>
+          <div className="w-full h-full"
+             style={{backgroundImage: `url(${userData.avatar})`,
+             backgroundPosition: 'center',
+             backgroundSize: 'cover'}}
+          ></div>
         </Popover>
       </div>
     );

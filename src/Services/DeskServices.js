@@ -16,6 +16,20 @@ export const DeskService = {
       })
     },
 
+    GetLikedDeskByUserId: (_userId) => {
+      return axios({
+        url: `${BASE_URL}/desks/getdesksliked/${_userId}`,
+        method: "GET"
+    })
+    },
+
+    GetHistoryDesksByUserId: (_userId) => {
+      return axios({
+        url: `${BASE_URL}/desks/gethistories/${_userId}`,
+        method: "GET"
+      })
+    },
+
     GetDeskById: (_id) => {
       return axios({
         url: `${BASE_URL}/desks/${_id}`,
@@ -52,6 +66,29 @@ export const DeskService = {
         url: `${BASE_URL}/rates`,
         data: _data,
         method: "PUT"
+      })
+    },
+
+    UpdateDesk: (_data, _id) => {
+      return axios({
+        url: `${BASE_URL}/desks/update/${_id}`,
+        method: "PUT",
+        data: _data
+      })
+    },
+
+    DeleteDesk: (_id) => {
+      return axios({
+        url: `${BASE_URL}/desks/delete/${_id}`,
+        method: "DELETE"
+      })
+    },
+
+    PushHistories: (_data) => {
+      return axios({
+        url: `${BASE_URL}/history/push`,
+        method: "POST",
+        data: _data
       })
     }
 }

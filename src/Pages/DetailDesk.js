@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   GetDeskById,
+  PushHistories,
   UserLikeDesk,
   UserUnlikeDesk,
 } from "../Redux/Actions/DeskAction";
@@ -38,6 +39,7 @@ export default function DetailDesk() {
   hashId -= 18082003;
   useEffect(() => {
     dispatch(GetDeskById(hashId));
+    dispatch(PushHistories({userId: userData.id, deskId: hashId}))
   }, []);
 
   const unLikeFunc = (userId) => {
@@ -136,8 +138,9 @@ export default function DetailDesk() {
             })}
             <span className="ml-1"> {rateSroceAvg}.0</span>
             <span className="ml-1">{`(${deskDetail.rates?.length} rates)`}</span>
-            {deskDetail.rates?.find((item) => item.userId === userData.id) ? (
+            { deskDetail.rates?.find((item) => item.userId === userData.id) ? (
               <Button
+              disabled={userData.id ? false : true}
                 onClick={() => {
                   dispatch({
                     type: "OPEN_MODAL",
@@ -162,6 +165,7 @@ export default function DetailDesk() {
               </Button>
             ) : (
               <Button
+              disabled={userData.id ? false : true}
                 onClick={() => {
                   dispatch({
                     type: "OPEN_MODAL",
@@ -190,6 +194,7 @@ export default function DetailDesk() {
             }}
             type="primary"
             className="md:w-32"
+            disabled = {cards.length > 0 ? false:true}
           >
             Learn
           </Button>
@@ -240,6 +245,8 @@ export default function DetailDesk() {
             }}
             type="primary"
             className="md:w-32"
+            disabled = {cards.length > 0 ? false:true}
+
           >
             Learn
           </Button>
