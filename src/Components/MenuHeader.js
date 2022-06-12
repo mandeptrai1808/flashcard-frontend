@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import CreateDesk from "./CreateDesk";
+import { SearchDesks } from "../Redux/Actions/DeskAction";
 
 const { Search } = Input;
 export default function MenuHeader() {
@@ -132,6 +133,9 @@ export default function MenuHeader() {
                 type: "CHANGE_PAGE",
                 key: 0,
               });
+              navigate("/")
+              window.location.reload()
+
             }}
             to="/"
             className="pt-4 duration-100 cursor-pointer border-blue-500 px-3 mr-10 hover:border-b-4"
@@ -194,6 +198,11 @@ export default function MenuHeader() {
       <div className="col-span-2 md:col-span-3 flex justify-end">
         <div className="md:block hidden">
           <Search
+          onSearch={(value) => {
+            navigate(`/searchresults/${value}`)
+            dispatch({type: "IS_LOADING"});
+            dispatch(SearchDesks(value))
+          }}
             placeholder="Search Desk..."
             className="pt-3 mr-10"
             style={{ width: 250 }}

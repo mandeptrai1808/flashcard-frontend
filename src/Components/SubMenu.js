@@ -3,6 +3,7 @@ import "./MenuStyle.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { Button, Input } from "antd";
+import { SearchDesks } from '../Redux/Actions/DeskAction';
 
 const { Search } = Input;
 
@@ -30,6 +31,7 @@ export default function SubMenu() {
               type: "CHANGE_PAGE",
               key: index
           })
+          dispatch({type: "TOUCH_SUBMENU"})
           navigate(addressNavigate)
           
       }}
@@ -43,6 +45,12 @@ export default function SubMenu() {
 
         <div className={`bg-white overflow-hidden w-full  md:hidden block shadow-md  ${classOpenSubMenu}`}>
         <Search
+         onSearch={(value) => {
+          navigate(`/searchresults/${value}`)
+          dispatch({type: "IS_LOADING"});
+          dispatch(SearchDesks(value));
+          dispatch({type: "TOUCH_SUBMENU"})
+        }}
             placeholder="Search Desk..."
             className="pt-3 "
             style={{ width: "100%" }}

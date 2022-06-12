@@ -19,6 +19,7 @@ import { Button } from "antd";
 import CarouselCard from "../Components/CarouselCard";
 import ShareDesk from "../Components/ShareDesk";
 import RateDesk from "../Components/RateDesk";
+import CommentPlace from "../Components/CommentPlace";
 
 export default function DetailDesk() {
   let userData = localStorage.getItem("login_user");
@@ -39,6 +40,7 @@ export default function DetailDesk() {
   hashId -= 18082003;
   useEffect(() => {
     dispatch(GetDeskById(hashId));
+    if (userData.id)
     dispatch(PushHistories({userId: userData.id, deskId: hashId}))
   }, []);
 
@@ -101,7 +103,14 @@ export default function DetailDesk() {
   return (
     <div className="relative z-10 md:container md:mx-auto md:w-3/4 mx-5 py-5">
       <div className="mb-5 pb-5 border-b-2">
+      <p
+        className="text-blue-500 cursor-pointer w-12 mb-2 hover:text-blue-400"
+        onClick={() => {
+          navigate(-1);
+        }}
+      >{`< Back`}</p>
         <div className="flex justify-between items-center">
+      
           <h1 className="m-0 text-3xl font-bold">{deskDetail.name}</h1>
           <p className="opacity-50">Made by: {deskDetail.username}</p>
         </div>
@@ -289,6 +298,8 @@ export default function DetailDesk() {
           )}
         </div>
       </div>
+
+      <CommentPlace deskId={hashId}/>
     </div>
   );
 }

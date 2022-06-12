@@ -10,6 +10,7 @@ import DetailDesk from './Pages/DetailDesk';
 import EditDesk from './Pages/EditDesk';
 import ListCard from './Pages/ListCard';
 import LearnPage from './Pages/LearnPage';
+import SearchResults from './Pages/SearchResults';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/desks" element={<HomeTemplate component={<Desks/>}/>}/>
           <Route path="/detaildesk/:deskId" element={<HomeTemplate component={<DetailDesk/>}/>}/>
           <Route path="/editdesk/:deskId" element={<HomeTemplate component={<EditDesk/>}/>}/>
+          <Route path="/searchresults/:keyword" element={<HomeTemplate component={<SearchResults/>}/>}/>
           <Route path="/listcard/:deskId" element={<HomeTemplate component={<ListCard/>}/>}/>
           <Route path="/learn/:deskId" element={<HomeTemplate component={<LearnPage/>}/>}/>
         </Routes>

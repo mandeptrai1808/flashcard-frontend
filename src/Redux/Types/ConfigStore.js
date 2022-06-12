@@ -8,6 +8,7 @@ import { SubMenuReducer } from "../Reducers/SubMenuReducer";
 import { LoginReducer } from "../Reducers/LoginReducer";
 import { ModalReducer } from "../Reducers/ModalReducer";
 import { DesksReducer } from "../Reducers/DesksReducer";
+import { CommentReducer } from "../Reducers/CommentReducer";
 const rootReducer = combineReducers({
     TestReducer,
     DrawerReducer,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
     SubMenuReducer,
     LoginReducer,
     ModalReducer,
-    DesksReducer
+    DesksReducer,
+    CommentReducer
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunk));

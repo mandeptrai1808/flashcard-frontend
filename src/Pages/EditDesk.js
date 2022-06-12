@@ -179,9 +179,11 @@ export default function EditDesk() {
         >
           {deskDetail.name}
         </Paragraph>
-        <Button onClick={() => {
+        <Button onClick={async () => {
+          dispatch(DeleteDesk(hashId, userData.id));        
           navigate("/desks");
-          dispatch(DeleteDesk(hashId, userData.id));
+          window.location.reload()
+
         }} type="danger">Delete Desk</Button>
        </div>
       </div>

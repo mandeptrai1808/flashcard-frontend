@@ -1,9 +1,13 @@
 const stateDefault = {
     myDesks: [],
+    likedDesk: [],
     historyDesks: [],
     deskDetail: {},
     cards: [],
-    processCard: 1
+    allDesks: [],
+    loadItem: true,
+    processCard: 1,
+    searchData: []
 }
 
 export const DesksReducer = (state = stateDefault, action) => {
@@ -13,22 +17,42 @@ export const DesksReducer = (state = stateDefault, action) => {
         return {...state};
       }
 
+      case "GET_ALL_DESK": {
+        let arr = action.content?.filter(item => item.status !== "PRIVATE");
+        if (arr.length > 0)
+        arr.sort((a,b) => {
+          return (b.likes?.length - a.likes?.length)
+        })
+        state.allDesks = arr;
+        return {...state}
+      }
+
       case "GET_DESK_DETAIL":{
         state.deskDetail = action.desk;
         state.cards = action.cards;
         return {...state};
       }
 
-      case "GET_MY_HISTORY":{
-        let array = action.content;
-        console.log(array)
-        array.sort((item_a, item_b) => {
-          return (item_b.history_id - item_a.history_id)
-        })
-        state.myDesks = array;
+      case "GET_SEARCH_DATA": {
+        state.searchData = action.content.filter(item => item.status !== "PRIVATE");
         return {...state}
       }
 
+      case "GET_MY_HISTORY":{
+        let array = action.content;
+        // console.log(array)
+        if (array.length > 0)
+        array.sort((item_a, item_b) => {
+          return (item_b.history_id - item_a.history_id)
+        })
+        state.historyDesks = array;
+        return {...state}
+      }
+
+      case "GET_LIKED_DESKS": {
+        state.likedDesks = action.content;
+        return {...state}
+      }
       case "UPDATE_DESK": {
         state.deskDetail.name = action.name;
         return {...state}
@@ -98,6 +122,16 @@ export const DesksReducer = (state = stateDefault, action) => {
       case "UPDATE_RATE":{
         const index = state.deskDetail.rates.findIndex(item => item.userId === action.id);
         state.deskDetail.rates[index].star = action.star;
+        return {...state}
+      }
+
+      case "IS_LOADED":{
+        state.loadItem = false
+        return {...state}
+      }
+
+      case "IS_LOADING":{
+        state.loadItem = true;
         return {...state}
       }
       default:

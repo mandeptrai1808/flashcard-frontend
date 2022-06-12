@@ -25,6 +25,8 @@ export const GetDesksByUserId = (_userId) => {
         type: "GET_MY_DESKS",
         content: data,
       });
+      dispatch({type: "IS_LOADED"})
+
     } catch (error) {
       console.log(error);
     }
@@ -36,9 +38,11 @@ export const GetLikedDesksByUserId = (_userId) => {
     try {
       let { data } = await DeskService.GetLikedDeskByUserId(_userId);
       dispatch({
-        type: "GET_MY_DESKS",
+        type: "GET_LIKED_DESKS",
         content: data,
       });
+      dispatch({type: "IS_LOADED"})
+
     } catch (error) {
       console.log(error);
     }
@@ -53,11 +57,27 @@ export const GetHistoryDesksByUserId = (_userId) => {
         type: "GET_MY_HISTORY",
         content: data,
       });
+      dispatch({type: "IS_LOADED"})
     } catch (error) {
       console.log(error);
     }
   };
 };
+
+  export const GetAllDesk = () => {
+    return async (dispatch) => {
+      try {
+        let {data} = await DeskService.GetAllDesks();
+        dispatch({
+          type: "GET_ALL_DESK",
+          content: data,
+        });
+        
+      } catch (error) {
+        console.log(error);        
+      }
+    }
+  }
 
 export const CreateDeskApi = (_dataNewDesk) => {
   return async (dispatch) => {
@@ -69,6 +89,7 @@ export const CreateDeskApi = (_dataNewDesk) => {
       );
       dispatch({ type: "CLOSE_MODAL" });
       dispatch(GetDesksByUserId(userData.id));
+      window.location.reload()
     } catch (error) {
       console.log(error);
       errorNotification("Có lỗi xảy ra", "Kiểm tra đường truyền!");
@@ -150,7 +171,8 @@ export const DeleteDesk = (_id, _userId) => {
         "Deleted desk!",
         "Bạn đã xóa desk thành công!!"
       );
-      dispatch(GetDesksByUserId(_userId))
+      await dispatch(GetDesksByUserId(_userId))
+      window.location.reload()
       console.log(data)
     } catch (error) {
       console.log(error)
@@ -165,6 +187,21 @@ export const PushHistories = (_data) => {
       console.log(data);
     } catch (error) {
       console.log(error)
+    }
+  }
+}
+
+export const SearchDesks = (_data) => {
+  return async (dispatch) => {
+    try {
+      let {data} = await DeskService.SearchDesks(_data);
+      dispatch({
+        type: "GET_SEARCH_DATA",
+        content: data
+      })
+      dispatch({type: "IS_LOADED"})
+    } catch (error) {
+      console.log(error);
     }
   }
 }

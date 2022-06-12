@@ -30,6 +30,13 @@ export const DeskService = {
       })
     },
 
+    GetAllDesks: () => {
+      return axios({
+        url: `${BASE_URL}/desks/getalldesk/`,
+        method: "GET"
+      })
+    },
+
     GetDeskById: (_id) => {
       return axios({
         url: `${BASE_URL}/desks/${_id}`,
@@ -89,6 +96,14 @@ export const DeskService = {
         url: `${BASE_URL}/history/push`,
         method: "POST",
         data: _data
+      })
+    },
+
+    SearchDesks: (_data) => {
+      return axios({
+        url: `${BASE_URL}/desks/search/${_data}`,
+        method: "GET",
+        // data: _data
       })
     }
 }
