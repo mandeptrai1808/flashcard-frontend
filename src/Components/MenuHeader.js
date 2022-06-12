@@ -171,7 +171,7 @@ export default function MenuHeader() {
                 key: 2,
               });
             }}
-            to="/page3"
+            to="/about"
             className="pt-4 duration-100 cursor-pointer border-blue-500 px-3 mr-10 hover:border-b-4"
           >
             About

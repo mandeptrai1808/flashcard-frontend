@@ -11,6 +11,7 @@ import EditDesk from './Pages/EditDesk';
 import ListCard from './Pages/ListCard';
 import LearnPage from './Pages/LearnPage';
 import SearchResults from './Pages/SearchResults';
+import About from './Components/About';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomeTemplate component={<HomePage/>}/>}/>
           <Route path="/desks" element={<HomeTemplate component={<Desks/>}/>}/>
+          <Route path="/about" element={<About/>}/>
           <Route path="/detaildesk/:deskId" element={<HomeTemplate component={<DetailDesk/>}/>}/>
           <Route path="/editdesk/:deskId" element={<HomeTemplate component={<EditDesk/>}/>}/>
           <Route path="/searchresults/:keyword" element={<HomeTemplate component={<SearchResults/>}/>}/>

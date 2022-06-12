@@ -4,11 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { Button, Input } from "antd";
 import { SearchDesks } from '../Redux/Actions/DeskAction';
+import Login from './Login';
 
 const { Search } = Input;
 
 
 export default function SubMenu() {
+  let userData = localStorage.getItem("login_user");
+  userData = userData && JSON.parse(userData);
+  
     const navigate = useNavigate();
     const {visible} = useSelector(state => state.SubMenuReducer)
     const {listItem, isActive} = useSelector(state => state.MenuItemReducer);
@@ -21,18 +25,64 @@ export default function SubMenu() {
     const content = listItem.map((item, index) => {
       let classActive = "";
       let addressNavigate = "";
+      let funcBt = () => {
+        
+      }
       if (isActive === index) classActive = "active";
-      if (index === 0) addressNavigate = "/";
-      if (index === 1) addressNavigate = "/desks";
-      if (index === 2) addressNavigate = "/about"; 
+      if (index === 0) {
+        addressNavigate = "/";
+        funcBt = () => {
+          dispatch({
+            type: "CHANGE_PAGE",
+            key: index
+        })
+        dispatch({type: "TOUCH_SUBMENU"})
+        navigate(addressNavigate)
+        window.location.reload()
+        
+        }
+      }
+      if (index === 1) {
+        addressNavigate = "/desks";
+       funcBt = () => {
+        if (!userData) {
+          dispatch({
+            type: "OPEN_DRAWER", 
+            content: <Login/>,
+            placement: "right"
+          })
+          // e.preventDefault()
+        }
+      
+        else
+       { dispatch({
+          type: "CHANGE_PAGE",
+          key: index
+      })
+      dispatch({type: "TOUCH_SUBMENU"})
+      navigate(addressNavigate)}
+       }
+      }
+      if (index === 2) {
+        addressNavigate = "/about"; 
+        funcBt = () => {
+          dispatch({
+            type: "CHANGE_PAGE",
+            key: index
+        })
+        dispatch({type: "TOUCH_SUBMENU"})
+        navigate(addressNavigate)
+        }
+      }
       return  <div key={index}
       onClick={()=>{
-          dispatch({
-              type: "CHANGE_PAGE",
-              key: index
-          })
-          dispatch({type: "TOUCH_SUBMENU"})
-          navigate(addressNavigate)
+          // dispatch({
+          //     type: "CHANGE_PAGE",
+          //     key: index
+          // })
+          // dispatch({type: "TOUCH_SUBMENU"})
+          // navigate(addressNavigate)
+          funcBt()
           
       }}
       className={`${classActive} mt-5 duration-100 cursor-pointer border-blue-500 px-3 mr-10 hover:border-b-4`}

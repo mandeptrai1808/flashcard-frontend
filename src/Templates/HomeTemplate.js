@@ -1,4 +1,5 @@
 import React from 'react'
+import Footer from '../Components/Footer'
 import MenuHeader from '../Components/MenuHeader'
 import SubMenu from '../Components/SubMenu'
 
@@ -9,6 +10,7 @@ export default function HomeTemplate(props) {
         <MenuHeader/>
         <SubMenu />
         {props.component}
+        {/* <Footer/> */}
     </div>
   )
 }

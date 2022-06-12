@@ -17,6 +17,7 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch({type: "IS_LOADING"})
     dispatch(GetAllDesk());
     if (userData.id)
     dispatch(GetHistoryDesksByUserId(userData.id));
