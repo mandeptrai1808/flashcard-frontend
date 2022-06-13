@@ -20,6 +20,7 @@ import CarouselCard from "../Components/CarouselCard";
 import ShareDesk from "../Components/ShareDesk";
 import RateDesk from "../Components/RateDesk";
 import CommentPlace from "../Components/CommentPlace";
+import { createNewNotification } from "../Redux/Actions/NotificationActions";
 
 export default function DetailDesk() {
   let userData = localStorage.getItem("login_user");
@@ -71,6 +72,12 @@ export default function DetailDesk() {
           deskId: deskDetail.id,
         })
       );
+      dispatch(createNewNotification({
+        content: ` has like your ${deskDetail.name} desk`,
+        username: userData.name,
+        avatar: userData.avatar,
+        userId: deskDetail.userId
+      }))
     } else alert("Login to like this desk!");
   };
 
@@ -299,7 +306,7 @@ export default function DetailDesk() {
         </div>
       </div>
 
-      <CommentPlace deskId={hashId}/>
+      <CommentPlace deskId={hashId} deskDetail = {deskDetail}/>
     </div>
   );
 }

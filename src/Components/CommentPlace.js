@@ -7,6 +7,7 @@ import {
   CreateNewComment,
   GetCommentsByDeskId,
 } from "../Redux/Actions/CommentActions";
+import { createNewNotification } from "../Redux/Actions/NotificationActions";
 const { TextArea } = Input;
 
 export default function CommentPlace(props) {
@@ -36,7 +37,12 @@ export default function CommentPlace(props) {
             initialValues={{ remember: true }}
             onFinish={(value) => {
               dispatch({ type: "IS_LOADING" });
-
+              dispatch(createNewNotification({
+                content: ` has comment in your ${props.deskDetail.name} desk`,
+                username: userData.name,
+                avatar: userData.avatar,
+                userId: props.deskDetail.userId
+              }))
               dispatch(
                 CreateNewComment(
                   {
@@ -52,7 +58,10 @@ export default function CommentPlace(props) {
             className="md:w-full w-4/5 flex items-center"
             style={{ paddingRight: 10, paddingLeft: 5 }}
           >
-            <Form.Item name="content" className="w-full">
+            <Form.Item 
+            rules={[
+            { required: true, message: "Please type comment!" },
+          ]} name="content" className="w-full">
               <TextArea
                 autoSize
                 style={{
@@ -95,7 +104,7 @@ export default function CommentPlace(props) {
             </div>
           </div>
           <p>
-            {item.content.split("\n").map((str) => {
+            {item.content?.split("\n").map((str) => {
               return <p>{str}</p>;
             })}
           </p>
