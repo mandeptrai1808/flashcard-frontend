@@ -173,7 +173,6 @@ export const DeleteDesk = (_id, _userId) => {
       );
       await dispatch(GetDesksByUserId(_userId))
       window.location.reload()
-      console.log(data)
     } catch (error) {
       console.log(error)
     }
@@ -184,7 +183,6 @@ export const PushHistories = (_data) => {
   return async (dispatch) => {
     try {
       let {data} = await DeskService.PushHistories(_data);
-      console.log(data);
     } catch (error) {
       console.log(error)
     }

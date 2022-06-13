@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Button, Carousel } from "antd";
-import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, ArrowRightOutlined, SettingOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { GetDeskById } from "../Redux/Actions/DeskAction";
 import ReactCardFlip from "react-card-flip";
 export default function CarouselCar(props) {
   const dispatch = useDispatch();
-  const { deskDetail, cards, processCard } = useSelector(
+  const { deskDetail, cards, processCard, isPlay, speedPlay } = useSelector(
     (state) => state.DesksReducer
   );
   const [isFlipped, setIsFlipped] = useState(true);
@@ -28,6 +28,7 @@ export default function CarouselCar(props) {
     setIsFlipped(false);
     carousel.prev();
   };
+
 
   //Press space to flip the card
   useEffect(() => {
@@ -116,6 +117,8 @@ export default function CarouselCar(props) {
   return (
     <div className="w-full">
       <Carousel
+      autoplay = {isPlay}
+      autoplaySpeed={speedPlay}
         afterChange={(currentSlide) => {
           dispatch({
             type: "SET_PROCESSCARD",
@@ -142,7 +145,7 @@ export default function CarouselCar(props) {
               next();
             }
           }}/>
-         
+        
       </div>
     </div>
   );

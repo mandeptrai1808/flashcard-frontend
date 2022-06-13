@@ -7,7 +7,9 @@ const stateDefault = {
     allDesks: [],
     loadItem: true,
     processCard: 1,
-    searchData: []
+    searchData: [],
+    isPlay: false,
+    speedPlay: 500
 }
 
 export const DesksReducer = (state = stateDefault, action) => {
@@ -17,6 +19,20 @@ export const DesksReducer = (state = stateDefault, action) => {
         return {...state};
       }
 
+      case "CHANGE_STATUS":{
+        state.deskDetail.status = action.content;
+        return {...state}
+      }
+
+      case "PLAY_BUTTON": {
+        state.isPlay = !state.isPlay;
+        return {...state}
+      }
+
+      case "SET_SPEED":{
+        state.speedPlay = action.speed
+        return {...state}
+      }
       case "GET_ALL_DESK": {
         let arr = action.content?.filter(item => item.status !== "PRIVATE");
         if (arr.length > 0)

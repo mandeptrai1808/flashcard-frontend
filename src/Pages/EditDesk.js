@@ -11,8 +11,10 @@ import {
   DeleteOutlined,
   HighlightOutlined,
   CheckOutlined,
+  GlobalOutlined,
+  LockOutlined
 } from "@ant-design/icons";
-import { Button, Input, Form, Typography, Popover } from "antd";
+import { Button, Input, Form, Typography, Popover, Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import {
   CreateNewCard,
@@ -31,6 +33,7 @@ export default function EditDesk() {
   const dispatch = useDispatch();
   const { deskDetail, cards } = useSelector((state) => state.DesksReducer);
 
+  console.log(deskDetail)
   //   console.log(cards);
 
   let params = useParams();
@@ -43,7 +46,7 @@ export default function EditDesk() {
     imageUrl: "",
     deskId: hashId,
   });
-
+  const { Option } = Select;
   useEffect(() => {
     dispatch(GetDeskById(hashId));
   }, []);
@@ -155,7 +158,7 @@ export default function EditDesk() {
   });
   return (
     <div className="relative z-10 md:container md:mx-auto md:w-3/4 mx-5 py-5">
-      <div className="mb-5 border-b-2">
+      <div className="mb-5">
         <p
           className="text-blue-500 cursor-pointer w-12 mb-2 hover:text-blue-400"
           onClick={() => {
@@ -175,17 +178,31 @@ export default function EditDesk() {
               dispatch(UpdateDesk({name: value}, hashId))
             },
           }}
-          className="text-3xl font-bold w-2/3"
+          className="text-3xl font-bold w-2/3 m-0"
+          style={{marginBottom: 10}}
         >
           {deskDetail.name}
         </Paragraph>
-        <Button onClick={async () => {
+        <div>
+        <Button className="ml-5" onClick={async () => {
           dispatch(DeleteDesk(hashId, userData.id));        
           navigate("/desks");
           window.location.reload()
 
         }} type="danger">Delete Desk</Button>
+        </div>
        </div>
+       <Select value={deskDetail.status} style={{ width: 120 }} onChange={(value) => {
+         dispatch({
+          type: "CHANGE_STATUS",
+          content: value
+         })
+         dispatch(UpdateDesk({status: value}, hashId))
+
+       }}>
+      <Option value="PRIVATE">PRIVATE <LockOutlined/> </Option>
+      <Option value="PUBLIC">PUBLIC <GlobalOutlined/> </Option>
+    </Select>
       </div>
 
       {/* card  */}

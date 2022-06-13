@@ -63,7 +63,7 @@ export default function HomePage() {
           </p>
           <p>
             <StarFilled style={{ color: "yellowgreen" }} />{" "}
-            {item.rates?.length <= 0 ? "Chưa có đánh giá" : `${starScore}.0`}
+            {item.rates?.length <= 0 ? "No rate" : `${starScore}.0`}
           </p>
         </div>
         <div>
@@ -115,7 +115,7 @@ export default function HomePage() {
           </p>
           <p>
             <StarFilled style={{ color: "yellowgreen" }} />{" "}
-            {item.rates?.length <= 0 ? "Chưa có đánh giá" : `${starScore}.0`}
+            {item.rates?.length <= 0 ? "No rate" : `${starScore}.0`}
           </p>
         </div>
         <div>

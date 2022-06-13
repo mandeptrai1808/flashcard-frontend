@@ -74,7 +74,7 @@ export default function CommentPlace(props) {
             </Form.Item>
             <Form.Item>
               <button
-                htmlType="submit"
+                // htmlType="submit"
                 className="w-10 h-10 rounded-full hover:bg-blue-800 cursor-pointer text-white text-xl flex justify-center items-center bg-blue-400"
               >
                 <SendOutlined />
@@ -89,7 +89,7 @@ export default function CommentPlace(props) {
   const contentComments = listComment.map((item, index) => {
     if (index < loadMore)
       return (
-        <div className="bg-white rounded-xl shadow-md w-full mb-5 px-5 py-2">
+        <div key={index} className="bg-white rounded-xl shadow-md w-full mb-5 px-5 py-2">
           <div className="flex border-b pb-2 justify-between items-center">
             <div className="flex items-center">
               <div
@@ -103,11 +103,11 @@ export default function CommentPlace(props) {
               <p className="m-0 text-md font-bold">{item.username}</p>
             </div>
           </div>
-          <p>
-            {item.content?.split("\n").map((str) => {
-              return <p>{str}</p>;
+          <div>
+            {item.content?.split("\n").map((str, idStr) => {
+              return <p key={idStr}>{str}</p>;
             })}
-          </p>
+          </div>
           <div className="text-right opacity-50">
             {dateFormat(item.createdAt, "dd/mm/yyyy, h:MM:ss TT")}
           </div>
