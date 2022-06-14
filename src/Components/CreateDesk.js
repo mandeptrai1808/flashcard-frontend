@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
 import { LikeFilled, StarFilled, LockOutlined, GlobalOutlined } from "@ant-design/icons";
 import { Form, Input, Button, Select } from "antd";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CreateDeskApi } from '../Redux/Actions/DeskAction';
 const { Option } = Select;
 export default function CreateDesk() {
 
     const dispatch = useDispatch();
-
+    const {isLoading} = useSelector(state => state.LoginReducer);
     let userData = localStorage.getItem("login_user");
     userData = userData && JSON.parse(userData);
 
@@ -45,8 +45,11 @@ export default function CreateDesk() {
         name="normal_login"
         className="login-form"
         initialValues={{ remember: true }}
-        // onFinish={onFinish}
-      >
+        onFinish={() => {
+          dispatch({type: "IS_LOADING_BTN"})
+          dispatch(CreateDeskApi(dataNewDesk));
+        }}
+        >
         <Form.Item
           name="name"
           rules={[
@@ -85,12 +88,10 @@ export default function CreateDesk() {
      
         <Form.Item>
           <Button
+          loading={isLoading}
             type="primary"
             htmlType="submit"
             className="login-form-button mt-2"
-            onClick={()=>{
-                dispatch(CreateDeskApi(dataNewDesk));
-            }}
           >
             Create
           </Button>

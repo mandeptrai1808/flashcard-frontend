@@ -33,7 +33,6 @@ export default function EditDesk() {
   const dispatch = useDispatch();
   const { deskDetail, cards } = useSelector((state) => state.DesksReducer);
 
-  console.log(deskDetail)
   //   console.log(cards);
 
   let params = useParams();
@@ -215,6 +214,10 @@ export default function EditDesk() {
           name="basic"
           initialValues={{ remember: true }}
           onFinish={() => {
+            dispatch({
+              type: "ADD_CARD",
+              data: newCardData
+            })
             dispatch(CreateNewCard(newCardData, hashId));
           }}
           autoComplete="off"

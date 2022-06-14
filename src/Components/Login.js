@@ -1,14 +1,16 @@
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LoginUser } from "../Redux/Actions/UserActions";
 import SignUp from "./SignUp";
 export default function Login() {
   const dispatch = useDispatch();
   const onFinish = (values) => {
     dispatch(LoginUser(values));
+    dispatch({type: "IS_LOADING_BTN"})
   };
+  const {isLoading} = useSelector(state => state.LoginReducer);
 
   return (
     <div>
@@ -52,6 +54,7 @@ export default function Login() {
 
         <Form.Item>
           <Button
+          loading={isLoading}
             type="primary"
             htmlType="submit"
             className="login-form-button"

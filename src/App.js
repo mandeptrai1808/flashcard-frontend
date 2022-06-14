@@ -12,12 +12,14 @@ import ListCard from './Pages/ListCard';
 import LearnPage from './Pages/LearnPage';
 import SearchResults from './Pages/SearchResults';
 import About from './Components/About';
+import Loading from './Components/Loading';
 
 
 function App() {
 
   return (
     <div className="App relative" >
+      <Loading/>
       <DrawerTemplate/>
       <ModalTemplate/>
       <BrowserRouter>

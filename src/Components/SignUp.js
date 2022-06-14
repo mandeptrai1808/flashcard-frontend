@@ -6,7 +6,7 @@ import {
   MailOutlined,
   PhoneOutlined
 } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Login from './Login';
 import { SignUpUser } from '../Redux/Actions/UserActions';
 export default function SignUp() {
@@ -14,8 +14,11 @@ export default function SignUp() {
   const finishForm = (value) => {
     // dispatch(RegisterUser(value))
     dispatch(SignUpUser(value));
-  }
+    dispatch({type: "IS_LOADING_BTN"})
 
+  }
+  const {isLoading} = useSelector(state => state.LoginReducer);
+  
   return (
     <div>
         <h1 className='text-3xl text-red'>SIGN UP</h1>
@@ -70,6 +73,7 @@ export default function SignUp() {
 
           <Form.Item>
             <Button
+              loading={isLoading}
               type="danger"
               htmlType="submit"
               className="login-form-button"

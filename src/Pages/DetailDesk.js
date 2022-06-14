@@ -40,6 +40,7 @@ export default function DetailDesk() {
   let hashId = params.deskId;
   hashId -= 18082003;
   useEffect(() => {
+    dispatch({type: "IS_LOADING_BTN"})
     dispatch(GetDeskById(hashId));
     if (userData.id)
     dispatch(PushHistories({userId: userData.id, deskId: hashId}))

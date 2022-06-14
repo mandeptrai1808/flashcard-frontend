@@ -22,10 +22,12 @@ export const LoginUser = (_dataLogin) => {
 
         localStorage.setItem('login_user', JSON.stringify(data.userFind));
         localStorage.setItem('access_token', data.token);
+        dispatch({type: "IS_LOADED_BTN"});
         dispatch({type: "CLOSE_DRAWER"});
         dispatch({type: "IS_LOGIN"});
         window.location.reload()
     } catch (error) {
+      dispatch({type: "IS_LOADED_BTN"});
       errorNotification("Đăng nhập thất bại", "Kiểm tra lại mật khẩu hoặc tên đăng nhập!")
     }
   }
@@ -36,6 +38,7 @@ export const SignUpUser = (_dataSignUp) => {
     try {
       let {data} = await UserService.SignUp(_dataSignUp);
       successNotification("Đăng ký thành công", "Bạn đã đăng ký tài khoản thành công!!")
+      dispatch({type: "IS_LOADED_BTN"})
       dispatch({
         type: "OPEN_DRAWER", 
         content: <Login/>,
@@ -44,6 +47,7 @@ export const SignUpUser = (_dataSignUp) => {
 
     } catch (error) {
       errorNotification("Đăng ký thất bại", "Kiểm tra lại mật khẩu hoặc tên đăng nhập!")
+      dispatch({type: "IS_LOADED_BTN"})
       
     }
   }
@@ -54,11 +58,13 @@ export const UpdateUser = (_data, _id) => {
     try {
       let {data} = await UserService.UpdateUser(_data, _id);
       localStorage.setItem('login_user', JSON.stringify(data.userFind));
+      dispatch({type: "IS_LOADED_BTN"});
       dispatch({type: "IS_LOGIN"});
       successNotification("Updated success!", "Bạn đã cập nhật tài khoản thành công!!")
 
       console.log(data);
     } catch (error) {
+      dispatch({type: "IS_LOADED_BTN"});
       console.log(error)
     }
   }

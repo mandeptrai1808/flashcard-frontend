@@ -29,7 +29,7 @@ export default function Desks() {
 
   const dispatch = useDispatch();
   const { myDesks, likedDesks, historyDesks, loadItem } = useSelector((state) => state.DesksReducer);
-  const { isLogin } = useSelector((state) => state.LoginReducer);
+  const { isLogin, isLoading } = useSelector((state) => state.LoginReducer);
 
   const [avatarUpdate, setAvatarUpdate] = useState("");
 
@@ -96,6 +96,7 @@ export default function Desks() {
         initialValues={{ remember: true }}
         onFinish={(value) => {
           // dispatch(CreateNewCard(newCardData, hashId));
+          dispatch({type: "IS_LOADING_BTN"})
           dispatch(UpdateUser({ avatar: avatarUpdate }, userData.id));
         }}
         autoComplete="off"
@@ -135,7 +136,7 @@ export default function Desks() {
               : "No image"} */}
         </div>
         <div className="col-span-1">
-          <Button htmlType="submit" type="danger">
+          <Button loading={isLoading} htmlType="submit" type="danger">
             Update
           </Button>
         </div>

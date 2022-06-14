@@ -1,5 +1,6 @@
 const stateDefault = {
-    isLogin: false
+    isLogin: false,
+    isLoading: false
 }
 
 export const LoginReducer = (state = stateDefault, action) => {
@@ -7,6 +8,16 @@ export const LoginReducer = (state = stateDefault, action) => {
       case "IS_LOGIN":{
           state.isLogin = !state.isLogin;
           return {...state}
+      }
+
+      case "IS_LOADING_BTN": {
+        state.isLoading = true;
+        return {...state}
+      }
+
+      case "IS_LOADED_BTN":{
+        state.isLoading = false;
+        return {...state}
       }
           
       default:

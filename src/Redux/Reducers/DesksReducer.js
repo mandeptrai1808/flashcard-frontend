@@ -19,6 +19,11 @@ export const DesksReducer = (state = stateDefault, action) => {
         return {...state};
       }
 
+      case "ADD_CARD":{
+        state.cards.push(action.data);
+        return {...state}
+      }
+
       case "CHANGE_STATUS":{
         state.deskDetail.status = action.content;
         return {...state}

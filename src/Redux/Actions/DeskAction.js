@@ -89,9 +89,11 @@ export const CreateDeskApi = (_dataNewDesk) => {
       );
       dispatch({ type: "CLOSE_MODAL" });
       dispatch(GetDesksByUserId(userData.id));
+      dispatch({type: "IS_LOADED_BTN"});
       window.location.reload()
     } catch (error) {
       console.log(error);
+      dispatch({type: "IS_LOADED_BTN"});
       errorNotification("Có lỗi xảy ra", "Kiểm tra đường truyền!");
     }
   };
@@ -101,6 +103,7 @@ export const GetDeskById = (_id) => {
   return async (dispatch) => {
     try {
       let {data} = await DeskService.GetDeskById(_id);
+      dispatch({type: "IS_LOADED_BTN"})
       dispatch({
         type: "GET_DESK_DETAIL",
         desk: data.desk,
